@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, Button, ScrollView } from 'react-native'
 import { useSelector } from 'react-redux'
+import Colors from '../../constants/Colors'
 const ProductDetailScreen = (props) => {
     const productId = props.navigation.getParam('productId')
     console.log("productid", productId, props)
@@ -9,7 +10,10 @@ const ProductDetailScreen = (props) => {
     return (
         <ScrollView style={styles.detailView}>
             <Image style={styles.image} source={{uri:selectProduct.imageUrl}}/>
-            <Button title="Add to cart" onPress={()=>{}}/>
+            <View style={styles.action}>
+            <Button color={Colors.primary} title="Add to cart" onPress={()=>{}}/>
+            </View>
+         
             <Text style={styles.price}>
                 ${selectProduct.price.toFixed(2)}
             </Text>
@@ -32,18 +36,24 @@ image:{
     height:300
 },
 detailView:{
-backgroundColor:'black'
+backgroundColor:'#fff'
 },
 price:{
+    // fontFamily:'open-sans-bold',
     fontSize:20,
     color:'#fff',
     textAlign:'center',
     marginVertical:20
 },
 description:{
+    // fontFamily:'open-sans',
     fontSize:24,
     textAlign:'center',
-    color:'#fff',
+    color:'black',
+},
+action:{
+    marginVertical:10,
+    alignItems:'center'
 }
 })
 

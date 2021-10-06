@@ -1,17 +1,22 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, Button, ScrollView } from 'react-native'
-import { useSelector } from 'react-redux'
+import { useSelector ,useDispatch} from 'react-redux'
 import Colors from '../../constants/Colors'
+import CartItem from '../../model/cart'
+import * as CartActions from '../../store/action/cart' 
+
 const ProductDetailScreen = (props) => {
     const productId = props.navigation.getParam('productId')
-    console.log("productid", productId, props)
+    // console.log("productid", productId, props)
     const selectProduct = useSelector(state => state.products.availableProducts.find(prod => prod.id === productId))
-    console.log("selectProduct", selectProduct)
+    // console.log("selectProduct", selectProduct)
+    const dispatch = useDispatch()
+
     return (
         <ScrollView style={styles.detailView}>
             <Image style={styles.image} source={{uri:selectProduct.imageUrl}}/>
             <View style={styles.action}>
-            <Button color={Colors.primary} title="Add to cart" onPress={()=>{}}/>
+            <Button color={Colors.primary} title="Add to cart" onPress={()=>{dispatch(CartActions.addToCart(selectProduct))}}/>
             </View>
          
             <Text style={styles.price}>

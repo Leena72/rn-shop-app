@@ -1,10 +1,12 @@
 import React from 'react';
 import { FlatList, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ProductItem from '../../components/shop/ProductItem'
+import * as CartActions from '../../store/action/cart'
 
 const ProductOverviewScreen = (props) => {
     const product = useSelector(state => state.products.availableProducts)// useSelector take input from redux state and the cbined reducer key which point towards available products
+     const dispatch = useDispatch()
     return (
         <FlatList data={product}
             keyExtractor={item => item.id}
@@ -20,7 +22,7 @@ const ProductOverviewScreen = (props) => {
                                 productTitle: itemData.item.title
                             })
                         }}
-                        onAddToCart={() => { }}
+                        onAddToCart={() => { dispatch(CartActions.addToCart(itemData.item))}}
                     />
             } />
     )
